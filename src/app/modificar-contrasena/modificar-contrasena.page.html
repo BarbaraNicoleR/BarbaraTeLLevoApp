@@ -1,0 +1,28 @@
+<ion-header [translucent]="true">
+    <ion-toolbar>
+        <ion-title>Modificar Contraseña</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+    <form [formGroup]="modificarContrasenaForm" (ngSubmit)="onSubmit()">
+        <ion-item>
+            <ion-label position="floating">Clave Provisoria</ion-label>
+            <ion-input formControlName="claveProvisoria" type="password" required></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label position="floating">Nueva Contraseña</ion-label>
+            <ion-input formControlName="nuevaContrasena" type="password" required></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label position="floating">Confirmar Nueva Contraseña</ion-label>
+            <ion-input formControlName="confirmarNuevaContrasena" type="password" required></ion-input>
+        </ion-item>
+        <ion-button expand="full" color="primary" type="submit" [disabled]="modificarContrasenaForm.invalid">
+            Confirmar
+        </ion-button>
+        <ion-button expand="full" color="primary" type="button" routerLink="/inicio">
+            Volver
+        </ion-button>
+    </form>
+</ion-content>

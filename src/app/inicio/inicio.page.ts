@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
 @Component({
   selector: 'app-inicio',
   templateUrl: './inicio.page.html',
@@ -9,10 +8,13 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class InicioPage implements OnInit {
   inicioForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(
+    private formBuilder: FormBuilder ) {
+
     this.inicioForm = this.formBuilder.group({
       user: ['', Validators.required],
       password: ['', Validators.required],
+      
     });
   }
 
