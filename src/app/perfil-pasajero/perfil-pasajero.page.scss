@@ -1,0 +1,17 @@
+.avatar-image {
+    width: 50px;
+    /* Define el ancho deseado para tu avatar */
+    height: 50px;
+    /* Define la altura deseada para tu avatar */
+}
+
+.logo-img {
+    display: block;
+    margin: 0; /* Elimina cualquier margen interior del elemento */
+    width: 100%; /* Ancho al 100% del contenedor */
+    height: 100%; /* Altura al 100% del contenedor */
+    object-fit: cover; /* Ajusta la imagen para cubrir el cuadro sin distorsionarla */
+    position: absolute; /* Coloca la imagen en una capa por encima del contenido */
+    top: 0;
+    left: 0;
+    z-index: -1; /* Coloca la imagen detrás del contenido */}

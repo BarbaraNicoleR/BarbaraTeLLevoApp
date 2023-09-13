@@ -23,6 +23,10 @@ const routes: Routes = [
     path: 'modificar-contrasena',
     loadChildren: () => import('./modificar-contrasena/modificar-contrasena.module').then( m => m.ModificarContrasenaPageModule)
   },
+  {
+    path: 'perfil-pasajero',
+    loadChildren: () => import('./perfil-pasajero/perfil-pasajero.module').then( m => m.PerfilPasajeroPageModule)
+  },
 ];
 
 @NgModule({
