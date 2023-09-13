@@ -25,5 +25,17 @@
   
   #container a {
     text-decoration: none;
+
+
   }
   
+  .form-container {
+    max-width: 300px; /* Ancho máximo del contenedor */
+    margin: 0 auto; /* Centrar horizontalmente el contenedor */
+    background-color: #fff; /* Fondo blanco */
+    padding: 20px; /* Relleno para separar el formulario del borde */
+    border-radius: 10px; /* Esquinas redondeadas */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Sombra */
+    margin-top: 20px; /* Espacio superior (ajusta según sea necesario) */
+    margin-bottom: 20px; /* Espacio inferior (ajusta según sea necesario) */
+}

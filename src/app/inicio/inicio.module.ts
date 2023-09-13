@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'; // Asegúrate de que ReactiveFormsModule esté importado
 
 import { IonicModule } from '@ionic/angular';
 
@@ -12,9 +12,10 @@ import { InicioPage } from './inicio.page';
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule, // Agrega ReactiveFormsModule aquí
     IonicModule,
-    InicioPageRoutingModule
+    InicioPageRoutingModule,
   ],
-  declarations: [InicioPage]
+  declarations: [InicioPage],
 })
 export class InicioPageModule {}
