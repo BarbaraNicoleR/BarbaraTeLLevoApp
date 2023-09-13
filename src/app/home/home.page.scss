@@ -1,0 +1,50 @@
+#container {
+  text-align: center;
+
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+#container strong {
+  font-size: 50px;
+  line-height: 26px;
+  margin-bottom: 40px !important; /* Usa !important para asegurarte de que este estilo prevalezca */
+}
+
+#container p {
+  font-size: 16px;
+  line-height: 22px;
+  margin-bottom: 40px;
+  margin-top: 40px;
+  color: blanchedalmond;
+
+  
+}
+
+#container a {
+  text-decoration: none;
+}
+
+
+.ion-margin-vertical {
+  width: 130px; /* Establece el ancho deseado para los botones */
+  margin-right: 0; /* Elimina el margen derecho */
+  margin: 0 auto; /* Centra horizontalmente los botones */
+  margin-top: 10px;
+}
+
+.ion-margin-top{
+  width: 130px; /* Establece el ancho deseado para los botones */
+  margin-right: 0; /* Elimina el margen derecho */
+  margin: 0 auto; /* Centra horizontalmente los botones */
+  margin-top: 10px;
+}
+
+.logo-img {
+  display: block; /* Esto asegura que la imagen esté en una línea separada y no se superponga con el texto */
+  margin: auto; /* Centra horizontalmente la imagen */
+  max-width:300px; /* Ajusta el ancho máximo de la imagen para que se ajuste al contenedor */
+  
+}
