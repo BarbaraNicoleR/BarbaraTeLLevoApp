@@ -11,15 +11,16 @@
       <ion-label position="floating">Correo Electrónico</ion-label>
       <ion-input formControlName="user" type="text" required></ion-input>
     </ion-item>
-    <ion-button expand="full" color="primary" type="submit"  [disabled]="recuperarForm.invalid" >
+    <ion-button expand="full" color="primary" type="submit" [disabled]="recuperarForm.invalid">
       Enviar
     </ion-button>
-    <ion-button expand="full" color="primary" type="submit" routerLink="/modificar-contrasena" >
-      Modificar
-    </ion-button>
-    <ion-button expand="full" color="primary" type="submit" routerLink="/inicio" >
-      Volver
-    </ion-button>
-    
   </form>
+  <!-- Botón "Modificar" sin lógica de alerta -->
+  <ion-button expand="full" color="primary" routerLink="/modificar-contrasena">
+    Modificar
+  </ion-button>
+  <!-- Botón "Volver" sin lógica de alerta -->
+  <ion-button expand="full" color="primary" routerLink="/inicio">
+    Volver
+  </ion-button>
 </ion-content>

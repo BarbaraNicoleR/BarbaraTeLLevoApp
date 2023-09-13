@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AlertController } from '@ionic/angular'; // Importa el AlertController
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-recuperar',
@@ -12,7 +12,7 @@ export class RecuperarPage implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private alertController: AlertController // Inyecta el AlertController
+    private alertController: AlertController
   ) {
     this.recuperarForm = this.formBuilder.group({
       user: ['', Validators.required],
@@ -26,10 +26,10 @@ export class RecuperarPage implements OnInit {
       // Lógica para manejar el envío del formulario
       console.log('Correo:', this.recuperarForm.value.user);
 
-      // Muestra la alerta
+      // Muestra la alerta solo al presionar el botón "Enviar"
       const alert = await this.alertController.create({
         header: '¡Correo enviado!',
-        message: 'favor revisar su correo electronico ahi estar su clave provisoria',
+        message: 'Favor revisar su correo electrónico. Su clave provisoria ha sido enviada.',
         buttons: ['OK'],
       });
 
