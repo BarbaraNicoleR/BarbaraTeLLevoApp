@@ -1,0 +1,35 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+      <ion-title>Registrar Pasajero</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form [formGroup]="registrarPasajeroForm" (ngSubmit)="onSubmit()">
+      <ion-item>
+        <ion-label position="floating">Ingrese nombre completo</ion-label>
+        <ion-input formControlName="nombreCompleto" type="text" required></ion-input>
+      </ion-item>
+      <ion-item>
+          <ion-label position="floating">Correo electronico</ion-label>
+          <ion-input formControlName="correoElectronico" type="text" required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Ingrese nombre de usuario</ion-label>
+        <ion-input formControlName="nombreUsuario" type="text" required></ion-input>
+      </ion-item>
+      <ion-item>
+          <ion-label position="floating">Ingrese Contraseña</ion-label>
+          <ion-input formControlName="password" type="password" required></ion-input>
+      </ion-item>
+      <ion-button expand="full" color="primary" type="submit" [disabled]="registrarPasajeroForm.invalid"
+      routerLink="/inicio">
+          Registrate
+      </ion-button>
+      <ion-button expand="full" color="primary" type="submit" routerLink="/inicio"  >
+          Volver
+      </ion-button>
+      
+  </form>
+  
+</ion-content>
