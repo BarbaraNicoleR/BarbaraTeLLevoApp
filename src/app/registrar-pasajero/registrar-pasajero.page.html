@@ -8,15 +8,11 @@
   <form [formGroup]="registrarPasajeroForm" (ngSubmit)="onSubmit()">
       <ion-item>
         <ion-label position="floating">Ingrese nombre completo</ion-label>
-        <ion-input formControlName="nombreCompleto" type="text" required></ion-input>
+        <ion-input formControlName="name" type="text" required></ion-input>
       </ion-item>
       <ion-item>
           <ion-label position="floating">Correo electronico</ion-label>
-          <ion-input formControlName="correoElectronico" type="text" required></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="floating">Ingrese nombre de usuario</ion-label>
-        <ion-input formControlName="nombreUsuario" type="text" required></ion-input>
+          <ion-input formControlName="email" type="text" required></ion-input>
       </ion-item>
       <ion-item>
           <ion-label position="floating">Ingrese Contraseña</ion-label>

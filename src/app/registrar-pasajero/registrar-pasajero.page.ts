@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms'; 
 import { AlertController } from '@ionic/angular';
-
+import { Component, inject, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FirebaseService } from 'src/app/services/firebase.service';
+import { User } from 'src/app/models/user.model';
+import { UtilsService } from 'src/app/services/utils.service';
 
 @Component({
   selector: 'app-registrar-pasajero',
@@ -10,46 +12,55 @@ import { AlertController } from '@ionic/angular';
 })
 export class RegistrarPasajeroPage implements OnInit {
 
-  registrarPasajeroForm: FormGroup;
-  
+  registrarPasajeroForm: FormGroup; // Cambia el nombre del formulario aquí
 
   constructor(
     private formBuilder: FormBuilder,
-    private alertController: AlertController // Agrega el AlertController
+    private firebaseSvc: FirebaseService,//aqui se inyecta la chafa directo en el constructor
+    private utilsSvc: UtilsService //aqui se inyecta el uitoilservice
   ) {
+
     this.registrarPasajeroForm = this.formBuilder.group({
-      nombreCompleto: ['', Validators.required],
-      correoElectronico: ['', Validators.required],
-      nombreUsuario: ['', Validators.required],
-      password: ['', Validators.required],
-      
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      name: ['', [Validators.required, Validators.minLength(6)]],
     });
   }
 
-  ngOnInit() { }
+
+
+  ngOnInit() {
+    // Otro código de inicialización si es necesario
+  }
 
   async onSubmit() {
     if (this.registrarPasajeroForm.valid) {
-      // Acceder a los valores del formulario
-      const nombreCompleto = this.registrarPasajeroForm.value.nombreCompleto;
-      const correoElectronico = this.registrarPasajeroForm.value.correoElectronico;
-      const nombreUsuario = this.registrarPasajeroForm.value.nombreUsuario;
-      const password = this.registrarPasajeroForm.value.password;
+
+      const loading = await this.utilsSvc.loading();
+      await loading.present();
 
 
-      console.log('Clave Provisoria:', nombreCompleto);
-      console.log('Nueva Contraseña:', correoElectronico);
-      console.log('Confirmar Nueva Contraseña:', nombreUsuario);
-      console.log('Confirmar Nueva Contraseña:', password);
+
+      this.firebaseSvc.signUp(this.registrarPasajeroForm.value as User).then(async res => {
+        
+        await this.firebaseSvc.updateUser(this.registrarPasajeroForm.value.name);
+        console.log(res);
+      }).catch(error => {
+        console.log(error);
+
+        this.utilsSvc.presentToast({
+          message: error.message,
+          duration: 2500,
+          color: 'primary',
+          position: 'middle',
+          icon: 'alert-circle-outline'
+        })
 
 
-      const alert = await this.alertController.create({
-        header: 'Se ha registrado con exito!!!',
-        message: 'cuenta para ser pasajero... inicie sesion ',
-        buttons: ['OK'],
-      });
 
-      await alert.present();
+      }).finally(() => {
+        loading.dismiss();
+      })
     }
   }
 }

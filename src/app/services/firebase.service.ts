@@ -24,7 +24,7 @@ export class FirebaseService {
   }
 
   //============actualizar user ====================0
-  updateUswr(displayName :  string) {
+  updateUser(displayName :  string) {
     return updateProfile(getAuth().currentUser, { displayName})
   }
 
