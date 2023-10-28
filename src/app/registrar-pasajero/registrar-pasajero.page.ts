@@ -21,6 +21,7 @@ export class RegistrarPasajeroPage implements OnInit {
   ) {
 
     this.registrarPasajeroForm = this.formBuilder.group({
+      uid: [''],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
       name: ['', [Validators.required, Validators.minLength(6)]],
@@ -33,18 +34,23 @@ export class RegistrarPasajeroPage implements OnInit {
     // Otro código de inicialización si es necesario
   }
 
-  async onSubmit() {
+  //esto es para guardar los dattos del usuario pero sin la contraseña por eso se hace el delete 
+  async setUserInfo(uid: string) {
     if (this.registrarPasajeroForm.valid) {
 
       const loading = await this.utilsSvc.loading();
       await loading.present();
 
+      let path = `users/${uid}`;
+      //aqui deleteamos la password 
+      delete this.registrarPasajeroForm.value.password;
 
+      this.firebaseSvc.setDocument(path, this.registrarPasajeroForm.value).then(async res => {
 
-      this.firebaseSvc.signUp(this.registrarPasajeroForm.value as User).then(async res => {
+        this.utilsSvc.saveInLocalStorage('user', this.registrarPasajeroForm.value);
         
-        await this.firebaseSvc.updateUser(this.registrarPasajeroForm.value.name);
-        console.log(res);
+        this.utilsSvc.routerLink('/home');
+        this.registrarPasajeroForm.reset();
       }).catch(error => {
         console.log(error);
 
@@ -63,4 +69,44 @@ export class RegistrarPasajeroPage implements OnInit {
       })
     }
   }
+
+
+  async onSubmit() {
+    if (this.registrarPasajeroForm.valid) {
+
+      const loading = await this.utilsSvc.loading();
+      await loading.present();
+
+
+
+      this.firebaseSvc.signUp(this.registrarPasajeroForm.value as User).then(async res => {
+
+        await this.firebaseSvc.updateUser(this.registrarPasajeroForm.value.name);
+        
+        let uid = res.user.uid;
+
+        this.registrarPasajeroForm.controls['uid'].setValue(uid);
+        this.setUserInfo(uid);
+        
+      }).catch(error => {
+        console.log(error);
+
+        this.utilsSvc.presentToast({
+          message: error.message,
+          duration: 2500,
+          color: 'primary',
+          position: 'middle',
+          icon: 'alert-circle-outline'
+        })
+
+
+
+      }).finally(() => {
+        loading.dismiss();
+      })
+    }
+  }
+
+
+
 }
