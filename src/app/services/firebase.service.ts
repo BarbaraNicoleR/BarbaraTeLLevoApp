@@ -32,7 +32,9 @@ export class FirebaseService {
   }
 
   //=============RESTABLECER CONTRAEÑA POR EMAIL ============
-  
+  sendRecoveryEmail(email :  string){
+    return sendPasswordResetEmail(getAuth(),email);
+  }
 
   //============BASE DE DATOS ========================
 
