@@ -49,7 +49,7 @@ export class RegistrarPasajeroPage implements OnInit {
 
         this.utilsSvc.saveInLocalStorage('user', this.registrarPasajeroForm.value);
         
-        this.utilsSvc.routerLink('/home');
+        this.utilsSvc.routerLink('/inicio');
         this.registrarPasajeroForm.reset();
       }).catch(error => {
         console.log(error);
@@ -90,6 +90,8 @@ export class RegistrarPasajeroPage implements OnInit {
         
       }).catch(error => {
         console.log(error);
+
+        
 
         this.utilsSvc.presentToast({
           message: error.message,

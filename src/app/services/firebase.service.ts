@@ -1,14 +1,14 @@
 import { inject, Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { getAuth, signInWithEmailAndPassword , createUserWithEmailAndPassword, updateProfile} from 'firebase/auth';
+import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile , sendPasswordResetEmail} from 'firebase/auth';
 import { User } from '../models/user.model';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { getFirestore , setDoc , doc } from '@angular/fire/firestore';
+import { getFirestore, setDoc, doc , getDoc } from '@angular/fire/firestore';
 @Injectable({
   providedIn: 'root'
 })
 export class FirebaseService {
-  
+
 
   auth = inject(AngularFireAuth);
   firestore = inject(AngularFirestore);
@@ -27,17 +27,22 @@ export class FirebaseService {
   }
 
   //============actualizar user ====================0
-  updateUser(displayName :  string) {
-    return updateProfile(getAuth().currentUser, { displayName})
+  updateUser(displayName: string) {
+    return updateProfile(getAuth().currentUser, { displayName })
   }
 
+  //=============RESTABLECER CONTRAEÑA POR EMAIL ============
+  
 
   //============BASE DE DATOS ========================
 
   //===SETEAR DOCUMENTO =============
-  setDocument(path :  string, data: any){
-    return setDoc(doc(getFirestore(),path) ,data);
+  setDocument(path: string, data: any) {
+    return setDoc(doc(getFirestore(), path), data);
+  }
 
-
+  //====OBTENER DOCUMENTOS============
+  async getDocument(path : string) {
+  return (await getDoc(doc(getFirestore(),path))).data();
   }
 }
