@@ -27,7 +27,7 @@ export class AuthGuard implements CanActivate {
 
         }
         else{
-          this.utilsSvc.routerLink('/inicio');
+          this.utilsSvc.routerLink('/home');
           resolve(false);
         }
       })

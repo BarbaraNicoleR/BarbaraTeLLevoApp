@@ -48,7 +48,7 @@ getAuth(){
   signOut(){
     getAuth().signOut();
     localStorage.removeItem('user');
-    this.utilsSvc.routerLink('/inicio');
+    this.utilsSvc.routerLink('/home');
 
   }
   //============BASE DE DATOS ========================
