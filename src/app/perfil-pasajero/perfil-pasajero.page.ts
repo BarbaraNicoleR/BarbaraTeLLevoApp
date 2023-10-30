@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject} from '@angular/core';
+import { FirebaseService } from '../services/firebase.service';
+import { UtilsService } from '../services/utils.service';
+
 
 @Component({
   selector: 'app-perfil-pasajero',
@@ -7,9 +10,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PerfilPasajeroPage implements OnInit {
 
-  constructor() { }
+  constructor(
+  private firebaseSvc: FirebaseService,
+  private utilsSvc: UtilsService) { }
 
   ngOnInit() {
   }
+  //CERRRAR SESION BTN 
+  signOut() {
+    this.firebaseSvc.signOut();
+  }
+
 
 }
+
+
+
+
+
+

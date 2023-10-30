@@ -4,17 +4,25 @@ import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, up
 import { User } from '../models/user.model';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { getFirestore, setDoc, doc , getDoc } from '@angular/fire/firestore';
+import { UtilsService } from './utils.service';
 @Injectable({
   providedIn: 'root'
 })
 export class FirebaseService {
+  checkEmailExists(email: any) {
+    throw new Error('Method not implemented.');
+  }
 
 
   auth = inject(AngularFireAuth);
   firestore = inject(AngularFirestore);
+  utilsSvc = inject(UtilsService);
 
   // =============autenticacion =================
+getAuth(){
+  return getAuth();
 
+}
 
   //============acceder====================0
   signIn(user: User) {
@@ -36,6 +44,13 @@ export class FirebaseService {
     return sendPasswordResetEmail(getAuth(),email);
   }
 
+  //===========CERRAR SESION======================00
+  signOut(){
+    getAuth().signOut();
+    localStorage.removeItem('user');
+    this.utilsSvc.routerLink('/inicio');
+
+  }
   //============BASE DE DATOS ========================
 
   //===SETEAR DOCUMENTO =============
