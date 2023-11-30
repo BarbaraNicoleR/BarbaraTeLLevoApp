@@ -1,31 +1,41 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-      <ion-title>Registrar usuario</ion-title>
+    <ion-title>Registrar usuario</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
   <form [formGroup]="registrarPasajeroForm" (ngSubmit)="onSubmit()">
+    <ion-item>
+      <ion-label position="floating">Ingrese nombre completo</ion-label>
+      <ion-input formControlName="name" type="text" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Correo electrónico</ion-label>
+      <ion-input formControlName="email" type="text" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Ingrese Contraseña</ion-label>
+      <ion-input formControlName="password" type="password" required></ion-input>
+    </ion-item>
+    <!-- Nuevo elemento para mostrar el mensaje de registro -->
+    <ion-item *ngIf="registrarPasajeroForm.get('rol').value">
+      <ion-label style="font-weight: bold; color: #3880ff;">Cómo desea registrarse?</ion-label>
+    </ion-item>
+
+    <ion-radio-group formControlName="rol">
       <ion-item>
-        <ion-label position="floating">Ingrese nombre completo</ion-label>
-        <ion-input formControlName="name" type="text" required></ion-input>
+        <ion-radio value="conductor">Conductor</ion-radio>
       </ion-item>
       <ion-item>
-          <ion-label position="floating">Correo electronico</ion-label>
-          <ion-input formControlName="email" type="text" required></ion-input>
+        <ion-radio value="pasajero">Pasajero</ion-radio>
       </ion-item>
-      <ion-item>
-          <ion-label position="floating">Ingrese Contraseña</ion-label>
-          <ion-input formControlName="password" type="password" required></ion-input>
-      </ion-item>
-      <ion-button expand="full" color="primary" type="submit" [disabled]="registrarPasajeroForm.invalid"
-      routerLink="/inicio">
-          Registrate
-      </ion-button>
-      <ion-button expand="full" color="primary" type="submit" routerLink="/inicio"  >
-          Volver
-      </ion-button>
-      
+    </ion-radio-group>
+    <ion-button expand="full" color="primary" type="submit" [disabled]="registrarPasajeroForm.invalid" routerLink="/inicio">
+      Registrarse
+    </ion-button>
+    <ion-button expand="full" color="primary" type="submit" routerLink="/inicio">
+      Volver
+    </ion-button>
   </form>
-  
 </ion-content>

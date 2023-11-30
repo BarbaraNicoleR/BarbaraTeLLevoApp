@@ -25,6 +25,7 @@ export class RegistrarPasajeroPage implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
       name: ['', [Validators.required, Validators.minLength(6)]],
+      rol: ['conductor', Validators.required], // Agrega el campo 'rol' al formulario
     });
   }
 
