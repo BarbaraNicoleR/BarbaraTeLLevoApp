@@ -1,6 +1,6 @@
 import { AlertController } from '@ionic/angular';
 import { Component, inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, AbstractControl, ValidationErrors  } from '@angular/forms';
 import { FirebaseService } from 'src/app/services/firebase.service';
 import { User } from 'src/app/models/user.model';
 import { UtilsService } from 'src/app/services/utils.service';
@@ -25,8 +25,17 @@ export class RegistrarPasajeroPage implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
       name: ['', [Validators.required, Validators.minLength(6)]],
-      rol: ['conductor', Validators.required], // Agrega el campo 'rol' al formulario
+      rol: ['', [this.radioGroupValidator]]
     });
+  }
+
+  radioGroupValidator(control: AbstractControl): ValidationErrors | null {
+    const selectedValue = control.value;
+    if (selectedValue === 'conductor' || selectedValue === 'pasajero') {
+      return null;
+    } else {
+      return { radioInvalido: true };
+    }
   }
 
 
@@ -49,7 +58,7 @@ export class RegistrarPasajeroPage implements OnInit {
       this.firebaseSvc.setDocument(path, this.registrarPasajeroForm.value).then(async res => {
 
         this.utilsSvc.saveInLocalStorage('user', this.registrarPasajeroForm.value);
-        
+
         this.utilsSvc.routerLink('/inicio');
         this.registrarPasajeroForm.reset();
       }).catch(error => {
@@ -83,16 +92,16 @@ export class RegistrarPasajeroPage implements OnInit {
       this.firebaseSvc.signUp(this.registrarPasajeroForm.value as User).then(async res => {
 
         await this.firebaseSvc.updateUser(this.registrarPasajeroForm.value.name);
-        
+
         let uid = res.user.uid;
 
         this.registrarPasajeroForm.controls['uid'].setValue(uid);
         this.setUserInfo(uid);
-        
+
       }).catch(error => {
         console.log(error);
 
-        
+
 
         this.utilsSvc.presentToast({
           message: error.message,
