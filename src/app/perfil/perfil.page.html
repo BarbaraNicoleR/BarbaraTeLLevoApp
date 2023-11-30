@@ -1,0 +1,29 @@
+<ion-content>
+
+  <div class="ion-padding">
+  <ion-list lines="none">
+    <!-- Nombre -->
+    <ion-item class="ion-item-space">
+      <ion-label>
+        <h2>Nombre</h2>
+        <p>{{ utilsSvc.getFromLocalStorage('name') }}</p>
+      </ion-label>
+    </ion-item>
+    <!-- Correo Electronico -->
+    <ion-item class="ion-item-space">
+      <ion-label>
+        <h2>Correo Electronico</h2>
+        <p>{{ utilsSvc.getFromLocalStorage('email') }}</p>
+      </ion-label>
+    </ion-item>
+    <!-- rol -->
+    <ion-item class="ion-item-space">
+      <ion-label>
+        <h2>Rol</h2>
+        <p>{{ utilsSvc.getFromLocalStorage('rol') }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</div>
+  
+</ion-content>

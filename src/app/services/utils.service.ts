@@ -45,5 +45,7 @@ export class UtilsService {
     return JSON.parse(localStorage.getItem(key))
 
   }
+  
+
 
 }
