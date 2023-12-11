@@ -33,7 +33,11 @@ const routes: Routes = [
     loadChildren: () => import('./registrar-pasajero/registrar-pasajero.module').then( m => m.RegistrarPasajeroPageModule)
   },
 
-  { path: 'perfil', loadChildren: () => import('./perfil/perfil.module').then(m => m.PerfilPageModule) },
+  { path: 'perfil', loadChildren: () => import('./perfil/perfil.module').then(m => m.PerfilPageModule) },  {
+    path: 'crear-viaje',
+    loadChildren: () => import('./crear-viaje/crear-viaje.module').then( m => m.CrearViajePageModule)
+  },
+
 
 
 ];

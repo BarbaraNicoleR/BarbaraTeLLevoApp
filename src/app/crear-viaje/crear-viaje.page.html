@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Crear Viaje</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-item>
+    <ion-label>Origen</ion-label>
+    <ion-input [(ngModel)]="viaje.origen" placeholder="Ingrese el origen"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label>Destino</ion-label>
+    <ion-input [(ngModel)]="viaje.destino" placeholder="Ingrese el destino"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label>Valor</ion-label>
+    <ion-input [(ngModel)]="viaje.valor" placeholder="Ingrese el valor del viaje"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label>Asientos disponibles</ion-label>
+    <ion-input [(ngModel)]="viaje.cantidadAsientos" placeholder="Ingrese asientos disponibles"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label class="item-start">Fecha del viaje</ion-label>
+    <ion-datetime [(ngModel)]="viaje.fecha" displayFormat="MMM D, YYYY" placeholder="Seleccione la fecha" [min]="minDate"></ion-datetime>
+  </ion-item>
+  <!-- Repite este patrón para otros campos como destino, valor, cantidad de asientos, fecha, etc. -->
+  <ion-button expand="full" (click)="crearViaje()">Crear Viaje</ion-button>
+  <ion-button expand="full" color="primary" type="submit" routerLink="/perfil-pasajero">
+    Volver
+  </ion-button>
+</ion-content>

@@ -1,9 +1,9 @@
-import { inject, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile, sendPasswordResetEmail } from 'firebase/auth';
 import { User } from '../models/user.model';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { getFirestore, setDoc, doc, getDoc } from '@angular/fire/firestore';
+import { getFirestore, setDoc, doc, getDoc, collection, addDoc } from '@angular/fire/firestore';
 import { UtilsService } from './utils.service';
 @Injectable({
   providedIn: 'root'
@@ -14,7 +14,7 @@ export class FirebaseService {
     private auth: AngularFireAuth,
     private firestore: AngularFirestore,
     private utilsSvc: UtilsService
-  ) {}
+  ) { }
 
   getAuth() {
     return getAuth();
@@ -52,4 +52,37 @@ export class FirebaseService {
   async getDocument(path: string) {
     return (await getDoc(doc(getFirestore(), path))).data();
   }
+
+
+
+  // ... otros métodos existentes ...
+
+  async agregarViaje(viajeData: any) {
+    try {
+      // Obtener el ID del usuario actualmente autenticado
+      const uid = getAuth().currentUser?.uid;
+
+      if (!uid) {
+        throw new Error('Usuario no autenticado');
+      }
+
+      // Crear un nuevo documento en la colección 'viajes' con los datos proporcionados
+      const viajeRef = await addDoc(collection(getFirestore(), 'viajes'), {
+        uid: uid,
+        origen: viajeData.origen,                 
+        destino: viajeData.destino,               
+        valor: viajeData.valor,                   
+        cantidadAsientos: viajeData.cantidadAsientos,  
+        fecha: viajeData.fecha,                 
+      });
+
+      console.log('Viaje agregado con ID:', viajeRef.id);
+      return viajeRef.id;
+    } catch (error) {
+      console.error('Error al agregar viaje:', error);
+      throw error;
+    }
+  }
+
 }
+
