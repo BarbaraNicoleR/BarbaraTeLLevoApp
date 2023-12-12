@@ -23,9 +23,3 @@ export class PerfilPasajeroPage implements OnInit {
 
 
 }
-
-
-
-
-
-

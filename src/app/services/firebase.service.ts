@@ -6,6 +6,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { getFirestore, setDoc, doc, getDoc, collection, addDoc } from '@angular/fire/firestore';
 import { UtilsService } from './utils.service';
 import { Observable } from 'rxjs';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -90,9 +91,23 @@ export class FirebaseService {
     return this.firestore.collection('viajes').snapshotChanges();
   }
 
-  // Agrega una función para obtener información del usuario
   getUsuario(userId: string): Observable<User> {
     return this.firestore.collection('usuarios').doc<User>(userId).valueChanges();
   }
-  
-}
+
+  private userRole: string;
+
+  setUserRole(role: string) {
+    this.userRole = role;
+    localStorage.setItem('userRole', role); // Guarda el rol en localStorage
+  }
+
+  getUserRole(): string {
+    if (!this.userRole) {
+      // Si el rol no está en memoria, intenta recuperarlo desde localStorage
+      this.userRole = localStorage.getItem('userRole');
+    }
+    return this.userRole;
+
+
+}}
