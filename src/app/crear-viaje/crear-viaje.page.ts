@@ -9,7 +9,7 @@ import { ToastController } from '@ionic/angular';
 })
 export class CrearViajePage {
   viaje = {
-    origen: '',
+    origen: 'DUOC UC',
     destino: '',
     valor: '',
     cantidadAsientos: '',
@@ -26,10 +26,33 @@ export class CrearViajePage {
 
   async crearViaje() {
     try {
-      console.log('Función crearViaje ejecutada');
+      // Validaciones
+      if (this.viaje.origen.trim().toLowerCase() !== 'duoc uc') {
+        this.mostrarMensaje('El origen debe ser "Duoc UC"', 'danger');
+        return;
+      }
+
+      const valorNumerico = Number(this.viaje.valor);
+      if (valorNumerico < 1000 || valorNumerico > 4000) {
+        this.mostrarMensaje('El valor del viaje debe estar entre 1000 y 4000', 'danger');
+        return;
+      }
+
+      const asientosNumerico = Number(this.viaje.cantidadAsientos);
+      if (asientosNumerico < 1 || asientosNumerico > 4) {
+        this.mostrarMensaje('La cantidad de asientos debe estar entre 1 y 4', 'danger');
+        return;
+      }
+
+      const fechaActual = new Date().toISOString();
+      if (this.viaje.fecha < fechaActual) {
+        this.mostrarMensaje('La fecha del viaje no puede ser anterior a la fecha actual', 'danger');
+        return;
+      }
+
       // Llama al servicio para agregar el viaje
       const viajeId = await this.firebaseSvc.agregarViaje(this.viaje);
-      
+
       // Muestra un mensaje de éxito en verde y más notorio
       this.mostrarMensaje('Viaje agregado correctamente', 'success');
 

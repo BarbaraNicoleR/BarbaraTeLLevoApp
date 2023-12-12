@@ -5,6 +5,7 @@ import { User } from '../models/user.model';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { getFirestore, setDoc, doc, getDoc, collection, addDoc } from '@angular/fire/firestore';
 import { UtilsService } from './utils.service';
+import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
@@ -85,9 +86,13 @@ export class FirebaseService {
   }
   // ... otros métodos del servicio ...
 
-  getTodosViajes() {
+  getTodosViajes(): Observable<any[]> {
     return this.firestore.collection('viajes').snapshotChanges();
   }
 
+  // Agrega una función para obtener información del usuario
+  getUsuario(userId: string): Observable<User> {
+    return this.firestore.collection('usuarios').doc<User>(userId).valueChanges();
+  }
   
 }
