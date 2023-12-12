@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Historial de Viajes</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-list *ngIf="viajes && viajes.length > 0">
+    <ion-card *ngFor="let viaje of viajes">
+      <ion-item>
+        <ion-label>
+          <ion-text>Origen: {{ viaje.origen }}</ion-text>
+        </ion-label>
+        <ion-label>
+          <ion-text>Destino: {{ viaje.destino }}</ion-text>
+        </ion-label>
+        <ion-label>
+          <ion-text>Valor: {{ viaje.valor }}</ion-text>
+        </ion-label>
+        <ion-label>
+          <ion-text>Cantidad asientos: {{ viaje.cantidadAsientos }}</ion-text>
+        </ion-label>
+        <ion-label>
+          <ion-text>Fecha: {{ viaje.fecha }}</ion-text>
+        </ion-label>
+      </ion-item>
+    </ion-card>
+  </ion-list>
+  <ion-note *ngIf="!viajes || viajes.length === 0">No hay viajes disponibles.</ion-note>
+
+  <ion-button expand="full" color="primary" routerLink="/perfil-pasajero">
+    Volver
+  </ion-button>
+</ion-content>

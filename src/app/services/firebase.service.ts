@@ -69,11 +69,11 @@ export class FirebaseService {
       // Crear un nuevo documento en la colección 'viajes' con los datos proporcionados
       const viajeRef = await addDoc(collection(getFirestore(), 'viajes'), {
         uid: uid,
-        origen: viajeData.origen,                 
-        destino: viajeData.destino,               
-        valor: viajeData.valor,                   
-        cantidadAsientos: viajeData.cantidadAsientos,  
-        fecha: viajeData.fecha,                 
+        origen: viajeData.origen,
+        destino: viajeData.destino,
+        valor: viajeData.valor,
+        cantidadAsientos: viajeData.cantidadAsientos,
+        fecha: viajeData.fecha,
       });
 
       console.log('Viaje agregado con ID:', viajeRef.id);
@@ -83,6 +83,11 @@ export class FirebaseService {
       throw error;
     }
   }
+  // ... otros métodos del servicio ...
 
+  getTodosViajes() {
+    return this.firestore.collection('viajes').snapshotChanges();
+  }
+
+  
 }
-

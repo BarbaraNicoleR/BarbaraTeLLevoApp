@@ -1,0 +1,10 @@
+ion-list {
+    width: 100%;
+}
+
+ion-item {
+    display: block;
+    width: 100%;
+    white-space: normal;
+    /* Esto asegura que el texto se envuelva correctamente */
+}
